@@ -1,74 +1,643 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" />
-    <meta name="description" content="Align-Then-stEer: Adapting the Vision-Language Action Models through Unified Latent Guidance" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Align-Then-stEer: Project Page</title>
-
-    <!-- Fonts & Styles -->
-    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet" />
-    <link rel="stylesheet" href="./static/css/bulma.min.css" />
-    <link rel="stylesheet" href="./static/css/index.css" />
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          delimiters: [
+            {left: "$", right: "$", display: false},
+            {left: "\\[", right: "\\]", display: true}
+          ]
+        });
+      });
+    </script>
   </head>
+  <head>
+    <title>Align-Then-stEer: Adapting the Vision-Language Action Models through Unified Latent Guidance</title>
+
+  <!-- <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet"> -->
+
+  <!-- <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script> -->
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+
+  <link rel="icon" href="./static/images/favicon.jpg">
+
+
+
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <meta property="og:image:width" content="1600" />
+  <meta property="og:image:height" content="900" />
+
+</head>
 
   <body>
-    <!-- Title -->
     <section class="hero">
-      <div class="hero-body">
-        <div class="container has-text-centered">
-          <h1 class="title is-1 publication-title">
-            Align-Then-stEer:<br />
-            Adapting the Vision-Language Action Models<br />
-            through Unified Latent Guidance
-          </h1>
+      <div class="hero-body no-bottom-padding">
+        <div class="container">
+          <div class="columns is-centered">
+            <div class="column has-text-centered">
+              <h1 class="title is-1 publication-title">
+                Align-Then-stEer: Adapting the Vision-Language Action Models through Unified Latent Guidance  
+              </h1>
+              <div class="is-size-5 publication-authors">
+                <span class="author-block">
+                  <a target="_blank" href="https://github.com/breez3young">Yang Zhang</a><sup>1,2†</sup>&nbsp;&nbsp;&nbsp;
+                  <a>Chenwei Wang</a><sup>1,3†</sup>&nbsp;&nbsp;&nbsp;
+                  <a>Ouyang Lu</a><sup>1,4†</sup>&nbsp;&nbsp;&nbsp;
+                  <a>Yuan Zhao</a><sup>1</sup>&nbsp;&nbsp;&nbsp;
+                  <a>Yunfei Ge</a><sup>1</sup>&nbsp;&nbsp;&nbsp;
+                  <a>Zhenglong Sun</a><sup>3</sup>&nbsp;&nbsp;&nbsp;<br>
+                  <a>Xiu Li</a><sup>2</sup>&nbsp;&nbsp;&nbsp;
+                  <a>Chi Zhang</a><sup>1</sup>&nbsp;&nbsp;&nbsp;
+                  <a target="_blank" href="https://baichenjia.github.io/">Chenjia Bai</a><sup>1*</sup>&nbsp;&nbsp;&nbsp;
+                  <a>Xuelong Li</a><sup>1*</sup>&nbsp;&nbsp;&nbsp;
+                  <br /><sup>1</sup>Institute of Artificial Intelligence, China Telecom&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<sup>2</sup>Tsinghua University
+                  <br /><sup>3</sup>The Chinese University of Hong Kong, Shenzhen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<sup>4</sup>Northwestern Polytechnical University
+                  <br> <sup>†</sup>Equal contributions &nbsp;&nbsp;&nbsp;<sup>*</sup>Corresponding authors   
+                </span>
+              </div>
+              <div class="column has-text-centered">
+                <div class="publication-links">
+                  <!-- PDF Link. -->
+                  <!-- <span class="link-block">
+                    <a href="https://arxiv.org/abs/2406.00439"
+                       class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                          <i class="fas fa-file-pdf"></i>
+                      </span>
+                      <span>Paper</span>
+                    </a>
+                  </span> -->
+  
+                  <!-- arXiv Link. -->
+                  <span class="link-block">
+                    <a target="_blank" href="https://arxiv.org/abs/2509.02055"
+                       class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                          <i class="ai ai-arxiv"></i>
+                      </span>
+                      <span>ArXiv</span>
+                    </a>
+                  </span>
+                  <span class="link-block">
+                    <a href="https://github.com/TeleHuman/Align-Then-Steer"
+                       class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                          <i class="fab fa-github"></i>
+                      </span>
+                      <span>Code</span>
+                      </a>
+                    </span>
+                    <!-- Dataset Link. -->
+                    <!-- <span class="link-block">
+                      <a href="https://huggingface.co/collections/furonghuang-lab/tracevla-677d98483d23e9cec903d076"
+                         class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">
+                            <img src="static/images/hf_icon.svg" />
+                        </span>
+                        <span>Models</span>
+                        </a>
+                      </span> -->
 
-          <!-- Authors -->
-          <div class="is-size-6 publication-authors">
-            <span class="author-block">Author A<sup>1</sup>,</span>
-            <span class="author-block">Author B<sup>1</sup>,</span>
-            <span class="author-block">Author C<sup>2</sup></span>
-          </div>
-          <div class="is-size-6 publication-authors">
-            <span class="author-block"><sup>1</sup>Institution One</span>
-            <span class="author-block"><sup>2</sup>Institution Two</span>
-          </div>
-
-          <!-- Links -->
-          <div class="publication-links">
-            <span class="link-block">
-              <a href="paper.pdf" class="button is-normal is-rounded is-dark">📄 Paper</a>
-            </span>
-            <span class="link-block">
-              <a href="https://github.com/xxx/xxx" class="button is-normal is-rounded is-dark">💻 Code</a>
-            </span>
-            <span class="link-block">
-              <a href="video.html" class="button is-normal is-rounded is-dark">🎥 Video</a>
-            </span>
+                  <span class="link-block">
+                    <a target="_blank" href="about:blank"
+                       class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                          <i class="fab fa-twitter"></i>
+                      </span>
+                      <span>Twitter</span>
+                    </a>
+                  </span>
+                </div>
+    
+              </div>
+              </div>
+    
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Abstract -->
-    <section class="section">
-      <div class="container">
-        <h2 class="title is-3">Abstract</h2>
-        <p>
-          [Put your abstract here...]
-        </p>
+    <!-- overview -->
+    <section class="hero teaser">
+      <div class="container is-max-desktop">
+        <div class="hero-body">
+          <div align="center">
+            <img src="./static/images/overview.jpg" alt="method overview" width="95%">
+          </div>  
+          <br> 
+          <!-- <h2 class="subtitle has-text-centered"> -->
+          <h2 class="subtitle">
+            <p style="text-align: justify">
+            <!-- Given a scene, our approach (VRB) learns  <strong> actionable representations </strong> for robot learning. VRB predicts contact points and a post-contact trajectory learned from <strong> human videos </strong>.  -->
+            We present <strong>Align-Then-stEer (<span style="font-family: monospace;">ATE</span>)</strong>, a plug-and-play adaptation framework for pre-trained Vision-Language-Action (VLA) models.
+            Unlike prior methods that directly fine-tune VLAs, <strong><span style="font-family: monospace;">ATE</span></strong> aligns disparate action spaces into a unified latent representation and steers the diffusion- or flow-based VLA' s generation via guidance, enabling data-efficient cross-task and cross-embodiment adaptation.
+            This framework is evaluated in simulation on RoboTwin and ManiSkill benchmarks, as well as on a real-world dual-arm RealMan 7-DoF robot, demonstrating strong generalization, bimanual dexterous coordination, and minute-level long-horizon manipulation, achieving substantial gains in multi-task success rates.
+            </p>
+          </h2>
+          
+        </div>
+    
       </div>
     </section>
 
+    <!-- Abstract -->
+    <section class="hero is-light is-small">
+      <div class="hero-body">
+        <div class="container is-two-thirds">
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-two-thirds">
+              <h2 class="title is-3">Abstract</h2>
+            </div>
+        </div>
+      
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-two-thirds ">
+            <div class="content has-text-justified">
+              Vision-Language-Action (VLA) models pre-trained on large, diverse datasets show remarkable potential for general-purpose robotic manipulation. However, a primary bottleneck remains in adapting these models to downstream tasks, especially when the robot's embodiment or the task itself differs from the pre-training data. This discrepancy leads to a significant mismatch in action distributions, demanding extensive data and compute for effective fine-tuning. To address this challenge, we introduce <strong>Align-Then-stEer (<span style="font-family: monospace;">ATE</span>)</strong>, a novel, data-efficient, and plug-and-play adaptation framework. <span style="font-family: monospace;">ATE</span> first aligns disparate action spaces by constructing a unified latent space, where a variational autoencoder constrained by reverse KL divergence embeds adaptation actions into modes of the pre-training action latent distribution. Subsequently, it steers the diffusion- or flow-based VLA's generation process during fine-tuning via a guidance mechanism that pushes the model's output distribution towards the target domain. We conduct extensive experiments on cross-embodiment and cross-task manipulation in both simulation and real world. Compared to direct fine-tuning of representative VLAs, our method improves the average multi-task success rate by up to <strong>9.8%</strong> in simulation and achieves a striking <strong>32% success rate gain</strong> in a real-world cross-embodiment setting. Our work presents a general and lightweight solution that greatly enhances the practicality of deploying VLA models to new robotic platforms.
+            </div>
+          </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Two-stages Method  -->
+    <section class="section body">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-full-width">
+            <h2 class="title is-3" style="text-align: center; padding-bottom: 10px;">Build Unified Latent Space & Steer Adaptation Process</h2>
+            <!-- <h2 class="subtitle is-4" style="text-align: center;">Defining Visual Affordances</h2> -->
+            <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths ">
+            <div class="content has-text-justified">
+              
+              <tr>
+                <td>
+                  <div class="col">
+                    <div class="row">
+                      <img src="./static/images/stage_1_ATE.png" alt="stage 1 figure" width="90%">
+                    </div>
+                    <br><p style="text-align: center;font-size: 18px">Stage 1: Learning the Unified Action Latent Space</p>
+                    <div class="row">
+                      <img src="./static/images/stage_2_ATE.png" alt="stage 2 figure" width="100%">
+                    </div>
+                    <br><p style="text-align: center;font-size: 18px">Stage 2: Steering Efficient Adaptation with Latent Guidance</p>
+                  </div>
+                  <div class="columns is-centered">
+                    <div class="column">
+                          <p style="text-align: justify;font-size: 18px">(a) In the first stage, we construct a unified action space to bridge the embodiment gap in pretraining and adaptation stages by utilizing the mode-seeking behavior of asymmetric VAEs. (b) In the second stage, we integrate classifier guidance in diffusion and flow-based VLAs to steer the pretrained policy towards the target action distribution with specific robot platforms.</p>
+                  </div>
+                </div>
+                </td>
+              </tr>
+            </div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Simulation Experiment Results -->
+    <section class="section body">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-full-width">
+            <h2 class="title is-3" style="text-align: center; padding-bottom: 10px;">
+              Simulation Results: RoboTwin 1.0
+            </h2>
+            <div class="columns is-centered has-text-centered">
+              <div class="column is-four-fifths">
+                <div class="content has-text-justified">
+                  <div class="columns is-centered">
+                    <div class="column is-half">
+                      <img src="./static/images/pi0_top8_horizontal.svg" alt="RoboTwin $\pi_0$ Results" width="100%">
+                    </div>
+                    <div class="column is-half">
+                      <img src="./static/images/rdt_top8_horizontal.svg" alt="RoboTwin RDT Results" width="100%">
+                    </div>
+                  </div>
+                  <p style="text-align: justify; font-size: 18px; margin-top: 15px; padding-left: 10px;">
+                    <strong>Performance of fine-tuned VLA on RoboTwin 1.0 (Representative Tasks)</strong>: 
+                    We use our proposed <span style="font-family: monospace;">ATE</span> to fine-tune <strong>$\pi_0$</strong> and RDT-1B 
+                    across a mixture of 17 tasks. The resulting model consistently outperforms vanilla 
+                    fine-tuned <strong>$\pi_0$</strong> and RDT-1B across diverse 
+                    manipulation scenarios. This unified strategy enables faster convergence and more 
+                    robust performance on both single-arm and dual-arm tasks, including long-horizon 
+                    and tool-use settings.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    
+    
+
+    <section class="section body">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-full-width">
+            <h2 class="title is-3" style="text-align: center; padding-bottom: 10px;">Real-world Results: Dual Realman RM75 Robot Arm</h2>
+            <!-- <h2 class="subtitle is-4" style="text-align: center;">Defining Visual Affordances</h2> -->
+            <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths ">
+              <div class="content has-text-justified">
+                <p style="text-align: justify; font-size: 18px">
+                  $\pi_0$ + <span style="font-family: monospace;">ATE</span> excels at long-horizon manipulation tasks, precise pick-and-place operations, and complex tool-use scenarios, demonstrating reliable performance across both single-arm and dual-arm tasks.
+                  Below are videos of $\pi_0$ + <span style="font-family: monospace;">ATE</span> and $\pi_0$ on physical Realman robot manipulation tasks with different manipulation skills and objects. (Videos are sped up by <strong>3x</strong>.)
+                </p>
+              </div>
+                <div class="columns is-vcentered interpolation-panel">
+                <div class="column  has-text-centered">
+                  <h5>Make Sandwich</h5>
+                  <p style="font-size: 15px; color: #2a2727; margin: 2px 10%; line-height: 1.2;">
+                    (Dual-arm Handover Task)
+                  </p>
+                  <div style="width: 49%; display: inline-block;">
+                    <video autoplay controls muted loop playsinline width="100%">
+                        <source src="./static/video/base/make_sandwich_result/ATE.mp4" type="video/mp4">
+                    </video>
+                    <div style="text-align: center; margin-top: 5px;">
+                      $\pi_0$+ATE
+                    </div>
+                </div>
+                <div style="width: 49%; display: inline-block;">
+                  <video autoplay controls muted loop playsinline width="100%">
+                      <source src="./static/video/base/make_sandwich_result/baseline.mp4" type="video/mp4">
+                  </video>
+                  <div style="text-align: center; margin-top: 5px;">
+                      $\pi_0$
+                  </div>
+                </div>
+                </div>
+                <div class="column  has-text-centered">
+                  <h5>Cook Bun</h5>
+                  <p style="font-size: 15px; color: #2a2727; margin: 2px 10%; line-height: 1.2;">
+                    (Dual-arm Coordination Task)
+                  </p>
+                  <div style="width: 49%; display: inline-block;">
+                    <video autoplay controls muted loop playsinline width="100%">
+                      <source src="./static/video/base/cook_bun_result/ATE.mp4" type="video/mp4">
+                    </video>
+                    <div style="text-align: center; margin-top: 5px;">
+                      $\pi_0$+ATE
+                    </div>
+                  </div>
+                  <div style="width: 49%; display: inline-block;">
+                    <video autoplay controls muted loop playsinline width="100%">
+                      <source src="./static/video/base/cook_bun_result/baseline.mp4" type="video/mp4">
+                    </video>
+                    <div style="text-align: center; margin-top: 5px;">
+                      $\pi_0$
+                    </div>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="columns is-vcentered interpolation-panel">
+                <div class="column  has-text-centered">
+                  <h5>Pick Bun</h5>
+                  <p style="font-size: 15px; color: #2a2727; margin: 2px 10%; line-height: 1.2;">
+                    (Single-arm Precise Task)
+                  </p>
+                  <div style="width: 49%; display: inline-block;">
+                    <video autoplay controls muted loop playsinline width="100%">
+                        <source src="./static/video/base/pick_bun_result/ATE.mp4" type="video/mp4">
+                    </video>
+                    <div style="text-align: center; margin-top: 5px;">
+                        $\pi_0$+ATE
+                    </div>
+                </div>
+                <div style="width: 49%; display: inline-block;">
+                  <video autoplay controls muted loop playsinline width="100%">
+                      <source src="./static/video/base/pick_bun_result/baseline.mp4" type="video/mp4">
+                  </video>
+                  <div style="text-align: center; margin-top: 5px;">
+                      $\pi_0$
+                  </div>
+                </div>
+                </div>
+                <div class="column  has-text-centered">
+                  <h5>Make Yogurt Bowl</h5>
+                  <p style="font-size: 15px; color: #2a2727; margin: 2px 10%; line-height: 1.2;">
+                    (Tool-use Task)
+                  </p>
+                  <div style="width: 49%; display: inline-block;">
+                    <video autoplay controls muted loop playsinline width="100%">
+                      <source src="./static/video/base/milk_result/ATE.mp4" type="video/mp4">
+                    </video>
+                    <div style="text-align: center; margin-top: 5px;">
+                      $\pi_0$+ATE
+                    </div>
+                  </div>
+                  <div style="width: 49%; display: inline-block;">
+                    <video autoplay controls muted loop playsinline width="100%">
+                      <source src="./static/video/base/milk_result/baseline.mp4" type="video/mp4">
+                    </video>
+                    <div style="text-align: center; margin-top: 5px;">
+                      $\pi_0$
+                    </div>
+                  </div>
+                </div>
+              </div>
+    
+              
+  
+              <div class="columns is-centered">
+                <div class="column">
+                  <p style="text-align: justify; font-size: 18px">We design 5 real-world robot tasks covering different manipulation skills and objects, where <strong>$\mathbf{\pi_0}$+ATE</strong> outperforms vanilla $\pi_0$, excelling in long-horizon planning, precise manipulation, dual-arm coordination, and tool-use. These tasks are categorized as follows:</p>
+              
+                  <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between;">
+                    <div style="width: 48%; border: 2px solid #BEBEBE; border-radius: 15px; padding: 10px;">
+                      <strong>Dual-arm Handover Task</strong> (<em>Make sandwich</em>, <em>Use toaster</em>)
+                    </div>
+                    <div style="width: 48%; border: 2px solid #BEBEBE; border-radius: 15px; padding: 10px;">
+                      <strong>Dual-arm Coordinated Task</strong> (<em>Cook Bun</em>)
+                    </div>
+                    <div style="width: 48%; border: 2px solid #BEBEBE; border-radius: 15px; padding: 10px;">
+                      <strong>Single-arm Precise Manipulation Task</strong> (<em>Pick Bun</em>)
+                    </div>
+                    <div style="width: 48%; border: 2px solid #BEBEBE; border-radius: 15px; padding: 10px;">
+                      <strong>Tool-use Task</strong> (<em>Make Yogurt Bowl</em>)
+                    </div>
+                  </div>
+                </div>
+              </div>
+                </div>
+              </div>
+                <div class="row">
+                  <div class="col">
+                    <img src="static/images/real.png" alt="Image description" width="100%">
+                  </div>
+                </div>
+                <br>
+                <h2 class="subtitle">
+                  <p style="text-align: justify">
+                  <!-- Given a scene, our approach (VRB) learns  <strong> actionable representations </strong> for robot learning. VRB predicts contact points and a post-contact trajectory learned from <strong> human videos </strong>.  -->
+                  Real-world evaluation on physical robot experiments. Top panel reports success rates across four tasks and overall average, comparing ATE with the baseline $\pi_0$. Bottom panel shows full execution trajectories of four representative tasks, covering long-horizon, single-arm, and dual-arm scenarios.                 
+                  </p>
+                </h2>
+                </td>
+              </tr>
+            </div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+  
+    <!-- Real-world Generalization Experiment Results -->
+
+    <section class="section body">
+      <div class="container">
+        <h2 class="title is-3" style="text-align:center; padding-bottom:10px;">Generalization Evaluation Results</h2>
+    
+        <!-- 切换按钮 -->
+        <div class="columns is-centered has-text-centered" style="margin-bottom: 20px;">
+          <div class="column is-half" style="display:flex; justify-content:center; gap:20px; position:relative;">
+            <button class="tab-btn" data-index="0" style="background-color:#BEBEBE; color:white; padding:10px 20px; border:none; cursor:pointer; border-radius:15px; font-size:18px;">Varying Illumination</button>
+            <button class="tab-btn" data-index="1" style="background-color:#D4A6C8; color:white; padding:10px 20px; border:none; cursor:pointer; border-radius:15px; font-size:18px;">Visual Distractor</button>
+            <button class="tab-btn" data-index="2" style="background-color:#7D98C3; color:white; padding:10px 20px; border:none; cursor:pointer; border-radius:15px; font-size:18px;">Human Disturbance</button>
+            <div id="tab-slider" style="position:absolute; bottom:0; height:4px; background:#000; transition:all 0.3s ease; border-radius:2px;"></div>
+          </div>
+        </div>
+    
+                <!-- 视频组容器 -->
+        <div id="video-wrapper" style="overflow:hidden; width:100%;">
+          <div id="video-inner" style="display:flex; transition: transform 0.5s ease;">
+
+            <!-- 视频组 1: Varying Illumination -->
+            <div class="video-group" style="min-width:100%; display:flex; flex-direction:column; gap:20px; padding:25px; border:5px solid #BEBEBE; border-radius:15px; overflow-x:auto;">
+              
+              <!-- 任务标题行 -->
+              <div style="display:flex; gap:30px; align-items:center;">
+                <div style="min-width:120px;"></div> <!-- 占位符对应左侧标签空间 -->
+                <div style="flex:1; text-align:center;"><h4 style="font-weight:bold">Make Sandwich</h4></div>
+                <div style="flex:1; text-align:center;"><h4 style="font-weight:bold">Cook Bun</h4></div>
+                <div style="flex:1; text-align:center;"><h4 style="font-weight:bold">Pick Bun</h4></div>
+              </div>
+
+              <!-- Poor Illumination 行 -->
+              <div style="display:flex; gap:30px; align-items:center;">
+                <div style="min-width:120px; display:flex; align-items:center; justify-content:center;">
+                  <div style="text-align:center; font-weight:bold; font-size:18px; color:#666;">Poor<br />Illumination</div>
+                </div>
+                <div style="flex:1; display:flex; gap:15px; justify-content:center;">
+                  <div style="text-align:center;"><video autoplay muted loop playsinline controls width="280px"><source src="./static/video/generation/light/make_sandwich/25_ATE.mp4" type="video/mp4"></video><div>$\pi_0$+ATE</div></div>
+                  <div style="text-align:center;"><video autoplay muted loop playsinline controls width="280px"><source src="./static/video/generation/light/make_sandwich/25_baseline.mp4" type="video/mp4"></video><div>$\pi_0$</div></div>
+                </div>
+                <div style="flex:1; display:flex; gap:15px; justify-content:center;">
+                  <div style="text-align:center;"><video autoplay muted loop playsinline controls width="280px"><source src="./static/video/generation/light/cook_bun/25_ATE.mp4" type="video/mp4"></video><div>$\pi_0$+ATE</div></div>
+                  <div style="text-align:center;"><video autoplay muted loop playsinline controls width="280px"><source src="./static/video/generation/light/cook_bun/25_baseline.mp4" type="video/mp4"></video><div>$\pi_0$</div></div>
+                </div>
+                <div style="flex:1; display:flex; gap:15px; justify-content:center;">
+                  <div style="text-align:center;"><video autoplay muted loop playsinline controls width="280px"><source src="./static/video/generation/light/pick_bun/25_ATE.mp4" type="video/mp4"></video><div>$\pi_0$+ATE</div></div>
+                  <div style="text-align:center;"><video autoplay muted loop playsinline controls width="280px"><source src="./static/video/generation/light/pick_bun/25_baseline.mp4" type="video/mp4"></video><div>$\pi_0$</div></div>
+                </div>
+              </div>
+
+              <!-- Extreme Illumination 行 -->
+              <div style="display:flex; gap:30px; align-items:center;">
+                <div style="min-width:120px; display:flex; align-items:center; justify-content:center;">
+                  <div style="text-align:center; font-weight:bold; font-size:18px; color:#666;">Extreme<br />Illumination</div>
+                </div>
+                <div style="flex:1; display:flex; gap:15px; justify-content:center;">
+                  <div style="text-align:center;"><video autoplay muted loop playsinline controls width="280px"><source src="./static/video/generation/light/make_sandwich/65_ATE.mp4" type="video/mp4"></video><div>$\pi_0$+ATE</div></div>
+                  <div style="text-align:center;"><video autoplay muted loop playsinline controls width="280px"><source src="./static/video/generation/light/make_sandwich/65_baseline.mp4" type="video/mp4"></video><div>$\pi_0$</div></div>
+                </div>
+                <div style="flex:1; display:flex; gap:15px; justify-content:center;">
+                  <div style="text-align:center;"><video autoplay muted loop playsinline controls width="280px"><source src="./static/video/generation/light/cook_bun/65_ATE.mp4" type="video/mp4"></video><div>$\pi_0$+ATE</div></div>
+                  <div style="text-align:center;"><video autoplay muted loop playsinline controls width="280px"><source src="./static/video/generation/light/cook_bun/65_baseline.mp4" type="video/mp4"></video><div>$\pi_0$</div></div>
+                </div>
+                <div style="flex:1; display:flex; gap:15px; justify-content:center;">
+                  <div style="text-align:center;"><video autoplay muted loop playsinline controls width="280px"><source src="./static/video/generation/light/pick_bun/65_ATE.mp4" type="video/mp4"></video><div>$\pi_0$+ATE</div></div>
+                  <div style="text-align:center;"><video autoplay muted loop playsinline controls width="280px"><source src="./static/video/generation/light/pick_bun/65_baseline.mp4" type="video/mp4"></video><div>$\pi_0$</div></div>
+                </div>
+              </div>
+
+              <!-- Flash 行 -->
+              <div style="display:flex; gap:30px; align-items:center;">
+                <div style="min-width:120px; display:flex; align-items:center; justify-content:center;">
+                  <div style="text-align:center; font-weight:bold; font-size:18px; color:#666;">Flash</div>
+                </div>
+                <div style="flex:1; display:flex; gap:15px; justify-content:center;">
+                  <div style="text-align:center;"><video autoplay muted loop playsinline controls width="280px"><source src="./static/video/generation/light/make_sandwich/flash_ATE.mp4" type="video/mp4"></video><div>$\pi_0$+ATE</div></div>
+                  <div style="text-align:center;"><video autoplay muted loop playsinline controls width="280px"><source src="./static/video/generation/light/make_sandwich/flash_baseline.mp4" type="video/mp4"></video><div>$\pi_0$</div></div>
+                </div>
+                <div style="flex:1; display:flex; gap:15px; justify-content:center;">
+                  <div style="text-align:center;"><video autoplay muted loop playsinline controls width="280px"><source src="./static/video/generation/light/cook_bun/flash_ATE.mp4" type="video/mp4"></video><div>$\pi_0$+ATE</div></div>
+                  <div style="text-align:center;"><video autoplay muted loop playsinline controls width="280px"><source src="./static/video/generation/light/cook_bun/flash_baseline.mp4" type="video/mp4"></video><div>$\pi_0$</div></div>
+                </div>
+                <div style="flex:1; display:flex; gap:15px; justify-content:center;">
+                  <div style="text-align:center;"><video autoplay muted loop playsinline controls width="280px"><source src="./static/video/generation/light/pick_bun/flash_ATE.mp4" type="video/mp4"></video><div>$\pi_0$+ATE</div></div>
+                  <div style="text-align:center;"><video autoplay muted loop playsinline controls width="280px"><source src="./static/video/generation/light/pick_bun/flash_baseline.mp4" type="video/mp4"></video><div>$\pi_0$</div></div>
+                </div>
+              </div>
+            </div>
+    
+            
+            <!-- 视频组 2: Visual Distractor -->
+            <div class="video-group" style="min-width:100%; display:flex; justify-content:center; align-items:center; flex-wrap:wrap; gap:30px; padding:25px; border:5px solid #D4A6C8; border-radius:15px;">
+              <div class="task" style="text-align:center">
+                <h4 style="font-weight:bold">Make Sandwich</h4>
+                <video autoplay muted loop playsinline controls width="280px"><source src="./static/video/generation/visual_distractor/make_sandwich_result/ATE.mp4" type="video/mp4"></video><div>$\pi_0$+ATE</div>
+                <video autoplay muted loop playsinline controls width="280px"><source src="./static/video/generation/visual_distractor/make_sandwich_result/baseline.mp4" type="video/mp4"></video><div>$\pi_0$</div>
+              </div>
+              <div class="task" style="text-align:center;">
+                <h4 style="font-weight:bold">Cook Bun</h4>
+                <video autoplay muted loop playsinline controls width="280px"><source src="./static/video/generation/visual_distractor/cook_bun_result/ATE.mp4" type="video/mp4"></video><div>$\pi_0$+ATE</div>
+                <video autoplay muted loop playsinline controls width="280px"><source src="./static/video/generation/visual_distractor/cook_bun_result/baseline.mp4" type="video/mp4"></video><div>$\pi_0$</div>
+              </div>
+              <div class="task" style="text-align:center;">
+                <h4 style="font-weight:bold">Pick Farthest Bun</h4>
+                <video autoplay muted loop playsinline controls width="280px"><source src="./static/video/generation/visual_distractor/pick_bun_result/ATE.mp4" type="video/mp4"></video><div>$\pi_0$+ATE</div>
+                <video autoplay muted loop playsinline controls width="280px"><source src="./static/video/generation/visual_distractor/pick_bun_result/baseline.mp4" type="video/mp4"></video><div>$\pi_0$</div>
+              </div>
+              <div class="task" style="text-align:center;">
+                <h4 style="font-weight:bold">Make Yogurt Bowl</h4>
+                <video autoplay muted loop playsinline controls width="280px"><source src="./static/video/generation/visual_distractor/milk_result/ATE.mp4" type="video/mp4"></video><div>$\pi_0$+ATE</div>
+                <video autoplay muted loop playsinline controls width="280px"><source src="./static/video/generation/visual_distractor/milk_result/baseline.mp4" type="video/mp4"></video><div>$\pi_0$</div>
+              </div>
+            </div>
+    
+            <!-- 视频组 3: Human Disturbance -->
+            <div class="video-group" style="min-width:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px; padding:25px; border:5px solid #7D98C3; border-radius:15px; height:100%;">
+                <!-- 标题 -->
+                <h4 style="text-align:center; font-weight:bold; margin-bottom:10px;">Pick Bun</h4>
+                
+                <!-- 视频内容 -->
+                <div style="display:flex; justify-content:center; align-items:center; gap:30px;">
+                  <div>
+                    <video autoplay muted loop playsinline controls width="320px">
+                      <source src="./static/video/generation/human_disturbance/pick_bun_result/ATE.mp4" type="video/mp4">
+                    </video>
+                    <div style="text-align:center; margin-top:5px;">$\pi_0$+ATE</div>
+                  </div>
+                  <div>
+                    <video autoplay muted loop playsinline controls width="320px">
+                      <source src="./static/video/generation/human_disturbance/pick_bun_result/baseline.mp4" type="video/mp4">
+                    </video>
+                    <div style="text-align:center; margin-top:5px;">$\pi_0$</div>
+                  </div>
+              </div>
+            </div>
+      </div>
+    </section>
+    
+    <script>
+    const tabs = document.querySelectorAll('.tab-btn');
+    const inner = document.getElementById('video-inner');
+    const slider = document.getElementById('tab-slider');
+    
+    function showVideoGroup(index){
+      inner.style.transform = `translateX(-${index * 100}%)`;
+    
+      // 底部滑块
+      const tab = tabs[index];
+      slider.style.width = tab.offsetWidth + 'px';
+      slider.style.left = tab.offsetLeft + 'px';
+    }
+    
+    // 初始化
+    window.onload = () => {
+      showVideoGroup(0);
+    };
+    
+    // 点击切换
+    tabs.forEach(tab=>{
+      tab.addEventListener('click',()=>{
+        const idx = parseInt(tab.dataset.index);
+        showVideoGroup(idx);
+      });
+    });
+    </script>
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+    
+    
+
+    <!-- Safety Visualization Results -->
+
+
+    <!-- 设置视频倍速 -->
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const videos = document.querySelectorAll('video'); // 选择所有 <video> 元素
+        videos.forEach(video => {
+          video.playbackRate = 2.5;
+        });
+      });
+    </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const videos = document.querySelectorAll('video'); // 选择所有 <video> 元素
+        videos.forEach(video => {
+          video.playbackRate = 3; // 设置视频播放速度
+          video.muted = true; // 设置静音
+        });
+      });
+    </script>
     <!-- BibTeX -->
     <section class="section">
       <div class="container">
         <h2 class="title is-3">BibTeX</h2>
         <pre>
-@inproceedings{align2025,
+@article{zhang2025ate,
   title={Align-Then-stEer: Adapting the Vision-Language Action Models through Unified Latent Guidance},
-  author={Author A and Author B and Author C},
-  booktitle={arXiv},
+  author={Zhang, Yang and Wang, Chenwei and Lu, Ouyang and Zhao, Yuan and Ge, Yunfei and Sun, Zhenglong and Li, Xiu and Zhang, Chi and Bai, Chenjia and Li, Xuelong},
+  journal={arXiv preprint arXiv:2509.02055},
   year={2025}
 }
         </pre>
